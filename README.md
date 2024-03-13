@@ -33,23 +33,6 @@ import (
 	"github.com/BCJTI/bb-smart-sdk"
 )
 
-const clientId = ""
-const clientSecret = ""
-const publicKey = ""
-const accessToken = "ACCESS_TOKEN"
-
-func main() {
-	client := mp.NewClient(clientId, clientSecret, publicKey, accessToken)
-
-	pms, err := client.GetPaymentMethods()
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	for _, pm := range pms {
-		fmt.Println(pm.Name, pm.PaymentId)
-	}
-}
 ```
 
 
