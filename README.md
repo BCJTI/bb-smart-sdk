@@ -12,8 +12,8 @@ SDK para o gateway de pagamento [BB](https://apoio.developers.bb.com.br/referenc
  
 
 ## PRD
-    - https://oauth.sandbox.bb.com.br/oauth/token
-    - https://oauth.sandbox.bb.com.br/oauth/token
+ - https://oauth.sandbox.bb.com.br/oauth/token
+ - https://oauth.sandbox.bb.com.br/oauth/token
  
 
 ##### Endpoints implementados
