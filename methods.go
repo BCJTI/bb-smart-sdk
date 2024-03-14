@@ -3,6 +3,7 @@ package bb
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"strings"
@@ -56,7 +57,8 @@ func (c *Client) execute(method string, path string, params interface{}, headers
 
 	request, _ := http.NewRequest(method, url, payload)
 	request.Header.Add("accept", "application/json")
-	request.Header.Add("content-type", "application/json")
+	request.Header.Add("content-type", "application/x-www-form-urlencoded")
+	request.SetBasicAuth(c.ClientId, c.ClientSecret)
 
 	// add headers
 	if headers != nil {
@@ -69,6 +71,8 @@ func (c *Client) execute(method string, path string, params interface{}, headers
 	if err != nil {
 		return err
 	}
+	fmt.Print("Aqui")
+	fmt.Print(response.StatusCode)
 
 	defer response.Body.Close()
 

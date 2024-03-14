@@ -1,31 +1,35 @@
 package bb
 
-import "net/http"
+import (
+	"net/http"
+)
 
 const oauthTokenPath = "/oauth/token"
 
 type Client struct {
-	ClientId       string
-	ClientSecret   string
-	ApplicationKey string
-	AuthToken      AuthToken
-	httpClient     *http.Client
+	ClientId     string
+	ClientSecret string
+	PublicKey    string
+	AuthToken    AuthToken
+	httpClient   *http.Client
 }
 
 type AuthToken struct {
 	AccessToken string `json:"access_token"`
 	TokenType   string `json:"token_type"`
-	ExpiresIn   int    `json:"expires_in"`
+	ExpiresIn   int64  `json:"expires_id"`
 	Scope       string `json:"scope"`
 }
 
-func NewClient(id, secret, key, scope string) *Client {
+func NewClient(id, secret, token string) *Client {
 
 	return &Client{
-		ClientId:       id,
-		ClientSecret:   secret,
-		ApplicationKey: key,
-		httpClient:     http.DefaultClient,
+		ClientId:     id,
+		ClientSecret: secret,
+		AuthToken: AuthToken{
+			AccessToken: token,
+		},
+		httpClient: http.DefaultClient,
 	}
 
 }
@@ -33,10 +37,8 @@ func NewClient(id, secret, key, scope string) *Client {
 func (c *Client) Authorize() error {
 
 	data := Params{
-		"grant_type":    "client_credentials",
-		"client_id":     c.ClientId,
-		"client_secret": c.ClientSecret,
-		"scope":         c.AuthToken.Scope,
+		"grant_type": "client_credentials",
+		"scope":      "pagamentos-lote.pagamentos-guias-sem-codigo-barras-info pagamentos-lote.pagamentos-guias-sem-codigo-barras-requisicao pagamentos-lote.pagamentos-codigo-barras-info pagamentos-lote.pagamentos-info pagamentos-lote.lotes-info pagamentos-lote.devolvidos-info pagamentos-lote.cancelar-requisicao pagamentos-lote.transferencias-requisicao pagamentos-lote.transferencias-info pagamentos-lote.lotes-requisicao pagamentos-lote.boletos-requisicao pagamentos-lote.guias-codigo-barras-info pagamentos-lote.guias-codigo-barras-requisicao pagamentos-lote.transferencias-pix-info pagamentos-lote.transferencias-pix-requisicao pagamentos-lote.lotes-requisicao pagamentos-lote.transferencias-info pagamentos-lote.transferencias-requisicao pagamentos-lote.cancelar-requisicao pagamentos-lote.devolvidos-info pagamentos-lote.lotes-info pagamentos-lote.pagamentos-guias-sem-codigo-barras-info pagamentos-lote.pagamentos-info pagamentos-lote.pagamentos-guias-sem-codigo-barras-requisicao pagamentos-lote.pagamentos-codigo-barras-info pagamentos-lote.boletos-requisicao pagamentos-lote.guias-codigo-barras-info pagamentos-lote.guias-codigo-barras-requisicao pagamentos-lote.transferencias-pix-info pagamentos-lote.transferencias-pix-requisicao pagamentos-lote.pix-info pagamentos-lote.boletos-info",
 	}
 
 	return c.Post(oauthTokenPath, data, nil, &c.AuthToken)

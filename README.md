@@ -1,5 +1,3 @@
-#bb-smart-sdk
-
 # BB SDK Boletos
 
 
