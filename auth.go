@@ -41,6 +41,13 @@ func (c *Client) Authorize() error {
 		"scope":      "pagamentos-lote.pagamentos-guias-sem-codigo-barras-info pagamentos-lote.pagamentos-guias-sem-codigo-barras-requisicao pagamentos-lote.pagamentos-codigo-barras-info pagamentos-lote.pagamentos-info pagamentos-lote.lotes-info pagamentos-lote.devolvidos-info pagamentos-lote.cancelar-requisicao pagamentos-lote.transferencias-requisicao pagamentos-lote.transferencias-info pagamentos-lote.lotes-requisicao pagamentos-lote.boletos-requisicao pagamentos-lote.guias-codigo-barras-info pagamentos-lote.guias-codigo-barras-requisicao pagamentos-lote.transferencias-pix-info pagamentos-lote.transferencias-pix-requisicao pagamentos-lote.lotes-requisicao pagamentos-lote.transferencias-info pagamentos-lote.transferencias-requisicao pagamentos-lote.cancelar-requisicao pagamentos-lote.devolvidos-info pagamentos-lote.lotes-info pagamentos-lote.pagamentos-guias-sem-codigo-barras-info pagamentos-lote.pagamentos-info pagamentos-lote.pagamentos-guias-sem-codigo-barras-requisicao pagamentos-lote.pagamentos-codigo-barras-info pagamentos-lote.boletos-requisicao pagamentos-lote.guias-codigo-barras-info pagamentos-lote.guias-codigo-barras-requisicao pagamentos-lote.transferencias-pix-info pagamentos-lote.transferencias-pix-requisicao pagamentos-lote.pix-info pagamentos-lote.boletos-info",
 	}
 
+	/*auth := c.ClientId + ":" + c.ClientSecret
+	base64Auth := base64.StdEncoding.EncodeToString([]byte(auth))
+
+	header := Headers{
+		"Authorization": "Basic " + base64Auth,
+	}*/
+
 	return c.Post(oauthTokenPath, data, nil, &c.AuthToken)
 
 }

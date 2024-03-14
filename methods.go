@@ -71,7 +71,7 @@ func (c *Client) execute(method string, path string, params interface{}, headers
 	if err != nil {
 		return err
 	}
-	fmt.Print("Aqui")
+
 	fmt.Print(response.StatusCode)
 
 	defer response.Body.Close()
