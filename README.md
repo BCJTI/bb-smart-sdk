@@ -5,14 +5,16 @@ SDK para o gateway de pagamento [BB](https://apoio.developers.bb.com.br/referenc
 
 ### URL's
 ## HH
- - https://oauth.sandbox.bb.com.br/oauth/token
- - https://oauth.sandbox.bb.com.br/oauth/token
- 
+## AUTH
+- https://oauth.hm.bb.com.br
+## SERVICE
+- "https://api.hm.bb.com.br/cobrancas/v2
+
 
 ## PRD
  - https://oauth.sandbox.bb.com.br/oauth/token
  - https://oauth.sandbox.bb.com.br/oauth/token
- 
+
 
 ##### Endpoints implementados
 - [X] [Authentiction - Authentication](/oauth/token/ - POST)
