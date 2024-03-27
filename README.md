@@ -33,6 +33,12 @@ SDK para o gateway de pagamento [BB](https://apoio.developers.bb.com.br/referenc
 import (
 	"github.com/BCJTI/bb-smart-sdk"
 )
+var client *Client
+
+func init() {
+	client = NewClient(clientId, clientSecret, applicationKey)
+	err := client.Authorize()
+}
 
 ```
 
