@@ -14,7 +14,6 @@ const oauthTokenPath = "/oauth/token"
 type Client struct {
 	ClientId     string
 	ClientSecret string
-	Token        string
 	AppKey       string
 	AuthToken    AuthToken
 	httpClient   *http.Client
@@ -55,8 +54,11 @@ func NewClient(id, secret, token string) *Client {
 	return &Client{
 		ClientId:     id,
 		ClientSecret: secret,
-		AuthToken:    AuthToken{},
-		httpClient:   &http.Client{Transport: transport},
+		AppKey:       token,
+		AuthToken: AuthToken{
+			AccessToken: "",
+		},
+		httpClient: &http.Client{Transport: transport},
 	}
 
 }
@@ -65,7 +67,8 @@ func (c *Client) Authorize() error {
 
 	params := url.Values{}
 	params.Set("grant_type", "client_credentials")
-	params.Set("scope", "pagamentos-lote.pagamentos-guias-sem-codigo-barras-info pagamentos-lote.pagamentos-guias-sem-codigo-barras-requisicao pagamentos-lote.pagamentos-codigo-barras-info pagamentos-lote.pagamentos-info pagamentos-lote.lotes-info pagamentos-lote.devolvidos-info pagamentos-lote.cancelar-requisicao pagamentos-lote.transferencias-requisicao pagamentos-lote.transferencias-info pagamentos-lote.lotes-requisicao pagamentos-lote.boletos-requisicao pagamentos-lote.guias-codigo-barras-info pagamentos-lote.guias-codigo-barras-requisicao pagamentos-lote.transferencias-pix-info pagamentos-lote.transferencias-pix-requisicao pagamentos-lote.lotes-requisicao pagamentos-lote.transferencias-info pagamentos-lote.transferencias-requisicao pagamentos-lote.cancelar-requisicao pagamentos-lote.devolvidos-info pagamentos-lote.lotes-info pagamentos-lote.pagamentos-guias-sem-codigo-barras-info pagamentos-lote.pagamentos-info pagamentos-lote.pagamentos-guias-sem-codigo-barras-requisicao pagamentos-lote.pagamentos-codigo-barras-info pagamentos-lote.boletos-requisicao pagamentos-lote.guias-codigo-barras-info pagamentos-lote.guias-codigo-barras-requisicao pagamentos-lote.transferencias-pix-info pagamentos-lote.transferencias-pix-requisicao pagamentos-lote.pix-info pagamentos-lote.boletos-info")
+	params.Set("scope", "cobrancas.boletos-requisicao cobrancas.boletos-info pagamentos-lote.pagamentos-guias-sem-codigo-barras-info pagamentos-lote.pagamentos-guias-sem-codigo-barras-requisicao pagamentos-lote.pagamentos-codigo-barras-info pagamentos-lote.pagamentos-info pagamentos-lote.lotes-info pagamentos-lote.devolvidos-info pagamentos-lote.cancelar-requisicao pagamentos-lote.transferencias-requisicao pagamentos-lote.transferencias-info pagamentos-lote.lotes-requisicao pagamentos-lote.boletos-requisicao pagamentos-lote.guias-codigo-barras-info pagamentos-lote.guias-codigo-barras-requisicao pagamentos-lote.transferencias-pix-info pagamentos-lote.transferencias-pix-requisicao pagamentos-lote.lotes-requisicao pagamentos-lote.transferencias-info pagamentos-lote.transferencias-requisicao pagamentos-lote.cancelar-requisicao pagamentos-lote.devolvidos-info pagamentos-lote.lotes-info pagamentos-lote.pagamentos-guias-sem-codigo-barras-info pagamentos-lote.pagamentos-info pagamentos-lote.pagamentos-guias-sem-codigo-barras-requisicao pagamentos-lote.pagamentos-codigo-barras-info pagamentos-lote.boletos-requisicao pagamentos-lote.guias-codigo-barras-info pagamentos-lote.guias-codigo-barras-requisicao pagamentos-lote.transferencias-pix-info pagamentos-lote.transferencias-pix-requisicao pagamentos-lote.pix-info pagamentos-lote.boletos-info")
+	//params.Set("scope", "cobrancas.boletos-requisicao cobrancas.boletos-info")
 
 	return c.PostAuth(oauthTokenPath, params, &c.AuthToken)
 
