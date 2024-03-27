@@ -16,8 +16,8 @@ SDK para o gateway de pagamento [BB](https://apoio.developers.bb.com.br/referenc
 
 ##### Endpoints implementados
 - [X] [Authentiction - Authentication](/oauth/token/ - POST)
-- [ ] [Boleto - Lista](/boletos - GET)
-- [ ] [Boleto - Registro](boletos/ - POST)
+- [x] [Boleto - Lista](/boletos - GET)
+- [x] [Boleto - Registro](boletos/ - POST)
 - [ ] [Boleto - Detalhe](/boletos/{id} - GET)
 - [ ] [Boleto - Editar](/boletos/{id} - PATH)
 - [ ] [Boleto - Baixa/Cancelamento](/boletos/{id}/baixar - POST)
